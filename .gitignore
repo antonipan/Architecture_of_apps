@@ -28,4 +28,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-src/01_uml/
+/01_uml/
