@@ -22,6 +22,7 @@ public class ModelStore implements IModelChanger {
         this.cameras = new ArrayList<>();
         this.flashes = new ArrayList<>();
         this.scenes = new ArrayList<>();
+        //Так же в каждый список нужно добавить по элементу,об этом нам говорит связь между элементами
 
     }
 
