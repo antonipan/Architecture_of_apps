@@ -29,3 +29,4 @@ bin/
 .DS_Store
 
 src/01_uml/
+src/patterns
