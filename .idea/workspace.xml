@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5ea9d5b1-ef64-487f-9204-56fc4a8a6f38" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/CashProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/TickedBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/TickedProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/TickedWithPlace.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/buyTickeds/TickedWithoutPlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/solid/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/solid/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="5ea9d5b1-ef64-487f-9204-56fc4a8a6f38" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
