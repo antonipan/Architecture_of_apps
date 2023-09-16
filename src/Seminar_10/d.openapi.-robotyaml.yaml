@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: API по взаимодействию пользователя и робота-пылесоса 
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080/v1/
+    description: первая версия
+
+paths:
+  #/robots: # - доделать апи для массива роботов
+    
+  /robots/{vacuum_id}:
+    get:
+      summary: метод получения робота по идентификатору
+      tags:
+      - Vacuum
+      operationId: getVacuumId
+      parameters: 
+        - name: vacuum_id
+          in: path
+          required: true
+          description: идентификатор робота-пылесоса
+          schema:
+            type: string
+          example: 2121212132132
+      responses:
+        '200':
+          description: Успешный вывод робота-пылесоса
+          #headers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vacuum"
+        '400':
+          description: данное облако не обнаружено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления робота-пылесоса
+      operationId: createdVacuum
+      tags:
+        - Vacuum
+      parameters:
+        - name: vacuum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: 545464646545
+          # Method добавления комнаты.
+        - name: type_room
+          in: query
+          description: добавление к роботу карты комнаты.
+          schema:
+            type: string
+          example: 2022-07-01
+        # Здесь указываются остальные параметры, 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Vacuum"
+      responses:
+        '200':
+          "description": Облако успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Vacuum"
+          headers:
+            CorellationId:
+              schema:
+                type: string
+                example: aa1ff211-b5dd-4397-b8a8-3f640705efa2
+        '400':
+          "description": Указанное облако уже существует
+          content: {}
+          headers:
+            CorellationId:
+              schema:
+                type: string
+                example: aa1ff211-b5dd-4397-b8a8-3f640705efa2
+        '5XX':
+          description: Любая неожиданная ошибка сервиса
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          headers:
+            CorellationId:
+              schema:
+                type: string
+                example: aa1ff211-b5dd-4397-b8a8-3f640705efa2
+            Content-Language: 
+              description: Язык (локализация) содержимого
+              schema:
+                type: string
+                enum:
+                  - en
+                  - ru
+                example: en
+    put:
+      summary: Метод редактирования робот-пылесоса
+      operationId: Update vacuum
+      tags:
+        - Vacuum
+      parameters:
+        - name: vacuum_id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: cloudios
+          
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cloud"
+            example:
+              name: Cloudio
+              data-creating: 2022-01-01
+              OS: linux
+              ram: 2024
+              sdd: 150
+              core: 2
+      responses:
+        '200':
+          "description": Облако успешно создано
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cloud"
+          headers:
+            CorellationId:
+              schema:
+                type: string
+                example: aa1ff211-b5dd-4397-b8a8-3f640705efa2
+        '400':
+          "description": Указанный пылесос не существует
+          content: {}
+          headers:
+            CorellationId:
+              schema:
+                type: string
+                example: aa1ff211-b5dd-4397-b8a8-3f640705efa2
+    delete:
+        summary: метод удаления пылесоса по идентификатору
+        description: Метод предназначен для удаления в БД 
+        operationId: deleteVaccuumById
+        tags:
+          - Vacuum
+        parameters:
+          - name: vacuum_id
+            in: path
+            required: true
+            description: Идентификатор пылесоса
+            example: 42abcd2b-8b9c-4af9-88f7-0bc180cf74b4
+            schema:
+              type: string
+              format: uuid
+        responses:
+          '200':
+            description: Успешное удаление
+            content:
+              application/json:
+                schema:
+                  $ref: "#/components/schemas/Vacuums"
+
+      
+components:
+  schemas:
+    Vacuum:
+      type: object
+      required:
+        - vacuum_id
+        - producer
+        - model
+        - version
+      properties:
+        vacuum_id: 
+          type: integer
+          example: 141432332645624623425
+        producer:
+          type: string
+          example: Polaris; Samsung
+        model: 
+          type: string
+          example: PX-123
+        version: 
+          type: string
+          example: 3.5.4
+    # Array of Vacuums          
+    Vacuums:
+      type: array
+      items:
+        $ref: "#/components/schemas/Vacuum"
+    # User of vacuumCleaner robot
+    User:
+      type: object
+      required:
+        - user_id
+        - name
+        - phone
+        - vacuum_id
+        - visit_data
+      properties:
+        user_id:
+          type: integer
+          example: 54112318574513213
+        name:
+          type: string
+          example: anton
+        phone:
+          type: string
+          example: 89485486480
+        vacuum_id:
+          type: integer
+          example: 654564465418454163
+        visit_data:
+          type: string
+          example: 21-10-2021
+    Error:
+      type: object
+      required: 
+        - code
+        - message
+        - date
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        date:
+          type: string
